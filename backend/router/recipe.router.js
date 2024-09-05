@@ -14,9 +14,10 @@ import authorization from '../middlewares/authorization.js';
 
 const router = express.Router();
 
+router.get('/', recipeController.readMultiple);
+
 router.use(authorization);
 
-router.get('/', recipeController.readMultiple);
 // router.post('/', uploadLocal.single('cover'), recipeController.createOne);
 // router.post('/', uploadCloudinary.single('cover'), recipeController.createOne);
 router.post('/', recipeController.createOne);
