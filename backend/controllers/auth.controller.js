@@ -19,7 +19,7 @@ export const register = async (req, res) => {
     });
 
     const userCreated = await newUser.save();
-    res.send(userCreated);
+    res.send({ user: userCreated });
 };
 
 export const login = async (req, res) => {

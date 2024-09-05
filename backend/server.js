@@ -18,7 +18,19 @@ passport.use('google', GoogleStrategy);
 
 app.use(morgan('dev')); // serve a fare i log delle richieste (per ora i logs li stampa sul termianle)
 // app.use(helmet()); // aggiunge alcuni headers alle risposte e ne nasconde altri per migliorare la sicurezza dell'api
-app.use(cors()); // permette la comunicazine tra backend e frontend su domini diversi
+
+const allowlist = [process.env.FRONTEND_URL];
+const corsOptionsDelegate = function (req, callback) {
+    let corsOptions;
+    if (allowlist.indexOf(req.header('Origin')) !== -1) {
+        corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response
+    } else {
+        corsOptions = { origin: false }; // disable CORS for this request
+    }
+    callback(null, corsOptions); // callback expects two parameters: error and options
+};
+
+app.use(cors(corsOptionsDelegate)); // permette la comunicazine tra backend e frontend su domini diversi
 
 app.use(express.json()); // fa il parsing del body delle richieste che hanno l'header Content-Type: application/json
 
