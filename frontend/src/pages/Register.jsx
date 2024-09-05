@@ -38,7 +38,7 @@ function Register() {
                 </Button>{' '}
                 or{' '}
                 <a
-                    href="http://localhost:5000/api/v1/login-google"
+                    href={`${process.env.REACT_APP_API_URL}/api/v1/login-google`}
                     className="btn btn-primary"
                 >
                     Sign up with Google

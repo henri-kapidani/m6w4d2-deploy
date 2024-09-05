@@ -26,7 +26,7 @@ function App() {
         if (!jwtToken && user) setUser(null);
 
         if (jwtToken && !user) {
-            fetch('http://localhost:5000/api/v1/me', {
+            fetch(`${process.env.REACT_APP_API_URL}/api/v1/me`, {
                 headers: {
                     Authorization: `Bearer ${jwtToken}`,
                 },
